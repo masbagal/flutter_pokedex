@@ -6,13 +6,23 @@ class PokemonDetail extends StatelessWidget {
 
   PokemonDetail({ this.pokedetail });
 
-  Widget bodyWidget () => Stack(
+  Widget bodyWidget (context) => Stack(
     children: <Widget>[
-      Container(
+      Positioned(
+        height: MediaQuery.of(context).size.height /1.5,
+        width: MediaQuery.of(context).size.width - 40,
+        left: 20,
+        top:MediaQuery.of(context).size.height * 0.1,
         child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16)
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Text(pokedetail.name),
+              SizedBox(height: 70),
+              Text(pokedetail.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
               Text('Height: ${pokedetail.height}'),
               Text('Weight: ${pokedetail.weight}'),
               Text('Types'),
@@ -37,6 +47,19 @@ class PokemonDetail extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      Align(
+        alignment: Alignment.topCenter,
+        child: Hero(
+          tag:pokedetail.img,
+          child: Container(
+            height: 160,
+            width: 160,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(pokedetail.img), fit: BoxFit.cover)
+            ),
+          ),
+        ),
       )
     ],
   );
@@ -51,7 +74,7 @@ class PokemonDetail extends StatelessWidget {
         title: Text(pokedetail.name),
         centerTitle: true,
       ),
-      body: bodyWidget(),
+      body: bodyWidget(context),
     );
   }
 }
