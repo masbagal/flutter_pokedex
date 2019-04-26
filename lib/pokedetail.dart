@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_flutter/pokemon.dart';
 
+Map typing = {
+'Normal': Colors.blueGrey[400],
+'Fire': Colors.red,
+'Water': Colors.blue,
+'Electric': Colors.yellow,
+'Grass': Colors.lightGreen,
+'Ice': Colors.cyan[600],
+'Fighting': Colors.amber[900],
+'Poison': Colors.purple,
+'Ground': Colors.brown,
+'Flying': Colors.brown[300],
+'Psychic': Colors.purple[900],
+'Bug': Colors.lime[800],
+'Rock': Colors.brown[900],
+'Ghost': Colors.grey[700],
+'Dragon': Colors.indigo,
+'Dark': Colors.grey[900],
+'Steel': Colors.blueGrey[400],
+'Fairy': Colors.pink[400],
+};
+
 class PokemonDetail extends StatelessWidget {
   final Pokemon pokedetail;
 
@@ -28,7 +49,11 @@ class PokemonDetail extends StatelessWidget {
               Text('Types'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: pokedetail.type.map((t) => FilterChip(onSelected:(t){}, label: Text(t), backgroundColor: Colors.amber)).toList(),
+                children: pokedetail.type.map((t) => FilterChip(
+                  onSelected:(t){}, 
+                  label: Text(t), 
+                  backgroundColor: Colors.amber
+                )).toList(),
               ),
               Text('Weakness'),
               Row(
@@ -42,8 +67,8 @@ class PokemonDetail extends StatelessWidget {
               Text('Next Evolution'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: pokedetail.nextEvolution.map((t) => FilterChip(onSelected:(t){}, label: Text(t.name))).toList(),
-              )
+                children: pokedetail.nextEvolution != null ? pokedetail.nextEvolution.map((t) => FilterChip(onSelected:(t){}, label: Text(t.name))).toList() : [Text('-')],
+              ) 
             ],
           ),
         ),
